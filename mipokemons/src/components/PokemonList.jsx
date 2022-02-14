@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { getAllPokemons } from "../services/pokemonService";
+import { PokemonCard } from "./PokemonCard";
 
 
 export function PokemonList(){
-    const url = 'https://pokeapi.co/api/v2/pokemon';
-    const [pokemons, setPokemons] = useState()
-    const fetchApi = async () => {
-        const response = await fetch (url)
-        const responseJSON = await response.json()
-        setPokemons(responseJSON)
-        console.log(responseJSON)
-    }
+    const [pokemons, setPokemons] = useState([]);
+    
     useEffect(() => {
-        fetchApi()},
-        []);
+        getAllPokemons().then((resp) => setPokemons(resp.results));
+    });
     return (
-        <div className="Pokemons">
-            <h1>Hola</h1>
-        </div>
-    )    
+        <h1>
+                {pokemons.map((pokemon) => (
+                    <PokemonCard pokemon={pokemon} key={pokemon.index}/>)
+                )}
+        </h1>
+    );    
 }
