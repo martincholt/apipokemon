@@ -3,11 +3,11 @@ export function PokemonCard(props) {
       <div>
         <div className="card">
           <div className="card-name">
-              <div className="cardName">name: {props.pokemon.name}</div>
+              <div className="cardName">Pokemon: {props.pokemon.name}</div>
           </div>  
-          {/* <div className="card-img">
-            <img src={props.pokemon.img} alt={props.pokemon.name} />
-          </div> */}
+          <div className="card-image">
+            <img src={props.pokemon.images} alt={props.pokemon.name} />
+          </div>
         </div>
       </div> 
     );
