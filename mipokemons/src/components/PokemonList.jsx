@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getAllImages, getAllPokemons } from "../services/pokemonService";
+import { getAllPokemons } from "../services/pokemonService";
 import { PokemonCard } from "./PokemonCard";
 import Style from "../styles/pokemonList.module.css"
 
 export function PokemonList(){
     const [pokemons, setPokemons] = useState([]);
-    const [images, setImg] = useState([0]);
-    
     useEffect(() => {
-        getAllPokemons().then((resp) => setPokemons(resp.results));
-        getAllImages().then((resp) => setImg(resp.data));
-    });
+        getAllPokemons().then((resp) => setPokemons(resp.results));  
+    },[]);
     return (
         <div className={Style.container}>
-                {pokemons.map((pokemon) => (
-                    <PokemonCard pokemon={pokemon} key={pokemon.index} img={images}/>)
+                {pokemons.map((pokemon, index) => (
+                    <PokemonCard pokemonName={pokemon.name} pokemonUrl={pokemon.url} key={index} />)
                 )}   
         </div>
     );    
